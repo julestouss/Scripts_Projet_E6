@@ -25,13 +25,13 @@ client.tls_insecure_set(True)
 # Callback lors de la connexion
 def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connecté avec le code {reason_code}")
-    client.subscribe("batterie/#")
+    client.subscribe("conso/#")
 
 
 
 # Callback lors de la réception d'un message
 def on_message(client, userdata, message):
-        id_prise = message.topic.replace("batterie/", "", 1)
+        id_prise = message.topic.replace("conso/", "", 1)
         donnee = message.payload.decode()
 
         sql_insert = "INSERT INTO Prise_Donnée (id_prise, Donnée) VALUES(%s, %s);"
